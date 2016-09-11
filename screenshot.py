@@ -4,6 +4,14 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtWebKit import *
+import argparse
+parser = argparse.ArgumentParser(description='Process args.')
+parser.add_argument('src', type=str,
+                    help='an integer for the accumulator')
+parser.add_argument('dst', type=str,
+                    help='an integer for the accumulator')
+parser.add_argument('filename', type=str,
+                    help='an integer for the accumulator')
 
 
 class browser(QWebView):
@@ -16,8 +24,13 @@ class browser(QWebView):
         self.timerScreen.timeout.connect(self.takeScreenshot)
 
         self.loadFinished.connect(self.timerScreen.start)
-        self.load(QUrl(
-            "http://107.170.246.247:8081/get_map?src=37.3386884%2C-121.9770935&dest=37.3375716%2C-121.8897658"))
+        global parser
+        args = parser.parse_args()
+        print args
+        self.filename = args.filename
+        url = "http://107.170.246.247:8081/get_map?src=" + args.src \
+            + "&dest=" + args.dst
+        self.load(QUrl(url))
 
     def takeScreenshot(self):
         image = QImage(self.page().mainFrame().contentsSize(),
@@ -27,9 +40,10 @@ class browser(QWebView):
         self.page().mainFrame().render(painter)
 
         painter.end()
-        image.save('map2' + ".png")
+        image.save(self.filename + ".png")
 
         sys.exit()
+
 
 if __name__ == "__main__":
     import sys
