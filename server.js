@@ -26,7 +26,7 @@ app.get('/get_map', function (req, res) {
             return console.log(err);
         }
     }); 
-    
+
     fs.readFile( __dirname + "/public/" + "index.html", 'utf8', function (err, data) {
       res.send( data );
     });
