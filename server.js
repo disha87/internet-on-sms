@@ -25,23 +25,12 @@ app.get('/get_map', function (req, res) {
         if(err) {
             return console.log(err);
         }
-
-        console.log("The file was saved!");
     }); 
+    
     fs.readFile( __dirname + "/public/" + "index.html", 'utf8', function (err, data) {
-        console.log( data );
-        // setTimeout(function(){
-          webshot(data, 'map.png', {siteType:'html'}, function(err) {
-            // screenshot now saved to google.png
-          });
-        // }, 20000);
-
-        
-        res.send( data );
-     });
+      res.send( data );
+    });
 })
-
-
 
 var server = app.listen(8081, function () {
 
