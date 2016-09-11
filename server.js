@@ -29,11 +29,11 @@ app.get('/get_map', function (req, res) {
         console.log("The file was saved!");
     }); 
     fs.readFile( __dirname + "/public/" + "index.html", 'utf8', function (err, data) {
-        console.log( data );
+        //console.log( data );
         // setTimeout(function(){
-          webshot(data, 'map.png', {siteType:'html'}, function(err) {
-            // screenshot now saved to google.png
-          });
+          // webshot(data, 'map.png', {siteType:'html'}, function(err) {
+          //   // screenshot now saved to google.png
+          // });
         // }, 20000);
 
         
